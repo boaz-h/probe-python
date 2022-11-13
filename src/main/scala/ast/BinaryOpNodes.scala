@@ -459,7 +459,7 @@ case class PyMapGet(val lhs: MapNode[String,Int], val rhs: PyStringNode) extends
 case class PyIntAddition(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryOpNode[Int] with PyIntNode
 {
   override protected val parenless: Boolean = false
-  override lazy val code: String = lhs.code + " + " + rhs.code
+  override lazy val code: String = lhs.parensIfNeeded + " + " + rhs.parensIfNeeded
 
   override def doOp(l: Any, r: Any): Option[Int] = (l, r) match {
     case (l: Int, r: Int) => Some(l.asInstanceOf[Int] + r.asInstanceOf[Int])
@@ -475,7 +475,7 @@ case class PyIntAddition(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryO
 case class PyIntMultiply(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryOpNode[Int] with PyIntNode
 {
   override protected val parenless: Boolean = false
-  override lazy val code: String = lhs.code + " * " + rhs.code
+  override lazy val code: String = lhs.parensIfNeeded + " * " + rhs.parensIfNeeded
 
   override def doOp(l: Any, r: Any): Option[Int] = (l, r) match {
     case (l: Int, r: Int) => Some(l.asInstanceOf[Int] * r.asInstanceOf[Int])
@@ -490,7 +490,7 @@ case class PyIntMultiply(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryO
 case class PyStringMultiply(val lhs: PyStringNode, val rhs: PyIntNode) extends BinaryOpNode[String] with PyStringNode
 {
   override protected val parenless: Boolean = false
-  override lazy val code: String = lhs.code + " * " + rhs.code
+  override lazy val code: String = lhs.code + " * " + rhs.parensIfNeeded
 
   override def doOp(l: Any, r: Any): Option[String] = (l, r) match {
     case (l: String, r: Int) => Some(l.asInstanceOf[String] * r.asInstanceOf[Int])
@@ -505,7 +505,7 @@ case class PyStringMultiply(val lhs: PyStringNode, val rhs: PyIntNode) extends B
 case class PyIntSubtraction(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryOpNode[Int] with PyIntNode
 {
   override protected val parenless: Boolean = false
-  override lazy val code: String = lhs.code + " - " + rhs.code
+  override lazy val code: String = lhs.parensIfNeeded + " - " + rhs.parensIfNeeded
 
   override def doOp(l: Any, r: Any): Option[Int] = (l, r) match {
     case (l: Int, r: Int) => Some(l - r)
