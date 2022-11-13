@@ -70,8 +70,7 @@ case class PyListStringAt(val lhs: ListNode[String], val rhs: PyIntNode) extends
       val l_str = l.asInstanceOf[List[String]]
       val idx = r.asInstanceOf[Int]
       if (idx >= l_str.length || idx < -l_str.length) None
-      else if (idx < 0) Some(l_str(l_str.length + idx))
-      else Some(l_str(idx))
+      else Some(l_str(Math.floorMod(idx , l_str.length)))
     case _ => wrongType(l, r)
   }
 
@@ -527,7 +526,7 @@ case class PyIntDivision(val lhs: PyIntNode, val rhs: PyIntNode) extends BinaryO
   override def doOp(l: Any, r: Any): Option[Int] =
     (l, r) match {
       case (_: Int, 0) => None
-      case (l: Int, r: Int) => Some(l / r)
+      case (l: Int, r: Int) => Some(Math.floorDiv(l ,r))
       case _ => wrongType(l, r)
     }
 
