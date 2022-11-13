@@ -104,7 +104,7 @@ class PyASTNodeTests extends JUnitSuite {
           new PyIntLiteral(2, 1)),
       new PyIntMultiply(new PyIntLiteral(3, 1),
         new PyIntLiteral(4, 1)))
-    assertEquals("1 * 2 * 3 * 4", multiplyNumbers.code)
+    assertEquals("(1 * 2) * (3 * 4)", multiplyNumbers.code)
     assertEquals(24, multiplyNumbers.values.head)
   }
 
@@ -1165,13 +1165,13 @@ class PyASTNodeTests extends JUnitSuite {
     assertEquals("(inp + \" \")[::-2].find(inp)",find2.code)
 
     val addNumbers = new PyIntAddition(new PyIntAddition(new PyIntLiteral(1,1),new PyIntLiteral(2,1)),new PyIntAddition(new PyIntLiteral(3,1), new PyIntLiteral(4,1)))
-    assertEquals("1 + 2 + 3 + 4", addNumbers.code)
+    assertEquals("(1 + 2) + (3 + 4)", addNumbers.code)
 
     val divNumbers = new PyIntDivision(addNumbers,new PyIntLiteral(1,1))
-    assertEquals("(1 + 2 + 3 + 4) // 1", divNumbers.code)
+    assertEquals("((1 + 2) + (3 + 4)) // 1", divNumbers.code)
 
     val divNumbers2 = new PyIntDivision(new PyIntLiteral(1,1),addNumbers)
-    assertEquals("1 // (1 + 2 + 3 + 4)", divNumbers2.code)
+    assertEquals("1 // ((1 + 2) + (3 + 4))", divNumbers2.code)
   }
   @Test def listStringAt(): Unit = ()
 }
