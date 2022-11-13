@@ -24,7 +24,7 @@ class PostprocessorTests  extends JUnitSuite{
       new PyIntLiteral(8, 1)
     )
     val postProcessed = PostProcessor.clean(expr)
-    assertEquals("x // 3 - -1 + 8",postProcessed.code)
+    assertEquals("((x // 3) - -1) + 8",postProcessed.code)
   }
   @Test def constantFoldIntOperationOneVar2: Unit = {
     val x = new PyIntVariable("x",Map("x" -> 2) :: Nil)
@@ -36,7 +36,7 @@ class PostprocessorTests  extends JUnitSuite{
       new PyIntLiteral(8, 1)
     )
     val postProcessed = PostProcessor.clean(expr)
-    assertEquals("2 // x - -1 + 8",postProcessed.code)
+    assertEquals("((2 // x) - -1) + 8",postProcessed.code)
   }
   @Test def constantFoldIntOperationOneVar3: Unit = {
     val x = new PyIntVariable("x",Map("x" -> 2) :: Nil)
@@ -47,7 +47,7 @@ class PostprocessorTests  extends JUnitSuite{
       ), new PyIntLiteral(8, 1)
     )
     val postProcessed = PostProcessor.clean(expr)
-    assertEquals("0 - x + 8",postProcessed.code)
+    assertEquals("(0 - x) + 8",postProcessed.code)
   }
   @Test def constantFoldIntOperationOneVar4: Unit = {
     val x = new PyIntVariable("x",Map("x" -> 2) :: Nil)
