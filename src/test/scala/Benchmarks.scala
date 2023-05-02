@@ -12,6 +12,7 @@ object Benchmarks extends App
   trace.DebugPrints.setNone()
   val benchmarks = new File("src/test/resources/")
   assert(benchmarks.isDirectory)
+//  Main.runToken("src/test/resources/tmp/test1.py")
 
   benchmarks.listFiles().filter(_.isDirectory).foreach(
     dir => {

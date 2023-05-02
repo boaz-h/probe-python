@@ -11,6 +11,7 @@ import trace.DebugPrints.{dprintln, iprintln}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.io.Source.fromFile
+import sygus.TokenParser
 
 object Main extends App {
   val filename =
@@ -146,10 +147,18 @@ object Main extends App {
     synthesizePython(task, sizeBased)
   }
 
+  def runToken(filename: String) = {
+    val p = new TokenParser()
+    p.parse(scala.io.Source.fromFile(filename).mkString)
+  }
+
   trace.DebugPrints.setInfo()
   //SyGus or Python Benchmark
   if (filename.endsWith(".sl"))
     synthesize(filename)
   else if (filename.endsWith(".json"))
     pySynthesize(filename)
+  else if (filename.endsWith(".py"))
+    runToken(filename)
+
 }

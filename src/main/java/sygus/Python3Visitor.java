@@ -113,6 +113,12 @@ public interface Python3Visitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpr_stmt(Python3Parser.Expr_stmtContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Python3Parser#probe_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProbe_expr(Python3Parser.Probe_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Python3Parser#annassign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -178,6 +178,16 @@ public interface Python3Listener extends ParseTreeListener {
 	 */
 	void exitExpr_stmt(Python3Parser.Expr_stmtContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Python3Parser#probe_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterProbe_expr(Python3Parser.Probe_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Python3Parser#probe_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitProbe_expr(Python3Parser.Probe_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Python3Parser#annassign}.
 	 * @param ctx the parse tree
 	 */
