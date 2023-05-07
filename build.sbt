@@ -11,7 +11,7 @@ libraryDependencies += "jline" % "jline" % "2.14.6"
 
 
 // https://mvnrepository.com/artifact/org.antlr/antlr4-runtime
-libraryDependencies += "org.antlr" % "antlr4-runtime" % "4.7.2"
+libraryDependencies += "org.antlr" % "antlr4-runtime" % "4.10.1"
 
 // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
 libraryDependencies += "org.apache.commons" % "commons-lang3" % "3.9"
@@ -41,4 +41,4 @@ assemblyJarName in (Test, assembly) := s"${name.value}-full.jar"
 
 javaOptions += "-Xmx4096m"
 //Anlr command line:
-//java -jar antlr-4.7.2-complete.jar -package "sygus" -visitor SyGuS.g4
+//java -jar antlr-4.7.2-complete.jar -package "sygus" -visitor Python3.g4

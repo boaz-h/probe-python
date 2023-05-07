@@ -1,4 +1,4 @@
-// Generated from ../src/main/java/Python3.g4 by ANTLR 4.7.2
+// Generated from C:/Users/boazy/Desktop/project/probe/src/main/java/sygus\Python3.g4 by ANTLR 4.10.1
 package sygus;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
@@ -130,6 +130,13 @@ public class Python3BaseVisitor<T> extends AbstractParseTreeVisitor<T> implement
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitExpr_stmt(Python3Parser.Expr_stmtContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitProbe_expr(Python3Parser.Probe_exprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

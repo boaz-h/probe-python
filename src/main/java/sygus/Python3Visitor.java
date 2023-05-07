@@ -1,4 +1,4 @@
-// Generated from ../src/main/java/Python3.g4 by ANTLR 4.7.2
+// Generated from C:/Users/boazy/Desktop/project/probe/src/main/java/sygus\Python3.g4 by ANTLR 4.10.1
 package sygus;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -112,6 +112,12 @@ public interface Python3Visitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpr_stmt(Python3Parser.Expr_stmtContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Python3Parser#probe_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProbe_expr(Python3Parser.Probe_exprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Python3Parser#annassign}.
 	 * @param ctx the parse tree

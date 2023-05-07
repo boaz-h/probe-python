@@ -1,4 +1,4 @@
-// Generated from ../src/main/java/Python3.g4 by ANTLR 4.7.2
+// Generated from C:/Users/boazy/Desktop/project/probe/src/main/java/sygus\Python3.g4 by ANTLR 4.10.1
 package sygus;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -215,6 +215,18 @@ public class Python3BaseListener implements Python3Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpr_stmt(Python3Parser.Expr_stmtContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProbe_expr(Python3Parser.Probe_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProbe_expr(Python3Parser.Probe_exprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

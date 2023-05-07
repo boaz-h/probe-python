@@ -2,6 +2,8 @@ package sygus
 
 import ast.ASTNode
 import enumeration.InputsValuesManager
+import net.liftweb.json.JsonAST.JObject
+import net.liftweb.json.JsonParser
 import org.antlr.v4.runtime.{BufferedTokenStream, CharStreams, RecognitionException, Token}
 
 import util.control.Breaks._
@@ -11,6 +13,7 @@ import trace.DebugPrints.{dprintln, iprintln}
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 import scala.io.Source.fromFile
+import sygus.TokenParser
 
 object Main extends App {
   val filename =
@@ -89,11 +92,9 @@ object Main extends App {
     p
   }
 
-  def synthesizePython(task: PySynthesisTask, sizeBased: Boolean, timeout: Int = 300): Option[(String, Int)] = {
+  def synthesizePythonInner(task: PySynthesisTask, sizeBased: Boolean, timeout: Int = 300, bank: mutable.Map[Int, mutable.ArrayBuffer[ASTNode]], mini: mutable.Map[Int, mutable.ArrayBuffer[ASTNode]]): Option[(String, Int)] = {
     var rs: Option[(String, Int)] = None
     val oeManager = new InputsValuesManager()
-    var bank = mutable.Map[Int, mutable.ArrayBuffer[ASTNode]]()
-    var mini = mutable.Map[Int, mutable.ArrayBuffer[ASTNode]]()
 
     val enumerator = if (!sizeBased) new enumeration.PyEnumerator(
       task.vocab,
@@ -135,6 +136,9 @@ object Main extends App {
     rs
   }
 
+
+  def synthesizePython(task: PySynthesisTask, sizeBased: Boolean, timeout: Int = 300) : Option[(String, Int)] =  synthesizePythonInner(task, sizeBased, timeout, mutable.Map[Int, mutable.ArrayBuffer[ASTNode]](), mutable.Map[Int, mutable.ArrayBuffer[ASTNode]]())
+
   def synthesize(filename: String, sizeBased: Boolean = true, probBased: Boolean = true) = {
     val task = new SygusFileTask(scala.io.Source.fromFile(filename).mkString)
     assert(task.isPBE)
@@ -146,10 +150,23 @@ object Main extends App {
     synthesizePython(task, sizeBased)
   }
 
+  def runToken(filename: String, sizeBased: Boolean = true) = {
+    val p = new TokenParser()
+    // pass only the python program to the python parser
+    val jsonString = scala.io.Source.fromFile(filename).mkString
+    val pyInput = JsonParser.parse(jsonString).asInstanceOf[JObject].values("pyInput").asInstanceOf[String]
+    val (bank, mini) = p.parse(pyInput).get
+    val task: PySynthesisTask = PythonPBETask.fromString(jsonString, sizeBased)
+    synthesizePythonInner(task, sizeBased, bank=bank, mini=mini)
+  }
+
   trace.DebugPrints.setInfo()
   //SyGus or Python Benchmark
   if (filename.endsWith(".sl"))
     synthesize(filename)
   else if (filename.endsWith(".json"))
     pySynthesize(filename)
+  else if (filename.endsWith(".py"))
+    runToken(filename)
+
 }
